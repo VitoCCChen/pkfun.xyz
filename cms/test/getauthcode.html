@@ -1,0 +1,24 @@
+<html>
+<head>
+    <title>mycard交易測試</title>
+</head>
+<body>
+<form method="GET" action="http://www.pkfun.xyz/api/GetAuthCode.php">
+<!--<form method="GET" action="../api/GetAuthCode.php">-->
+    會員代號<input type="text" name="CustomerId"><br>
+    <select id="money" name="Amount" class="form-control">
+        <option value="150">請選擇</option>
+    </select>
+    <select name="Currency">
+        <option>TWD</option>
+        <option>HKD</option>
+        <option>USD</option>
+    </select><br>
+    代理ID<input type="text" name="agent_id">
+    <input type="hidden" name="ProductName" value="GS5a5732d69e5e8">
+    <input type="submit" value="送出">
+</form>
+
+
+</body>
+</html>

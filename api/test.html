@@ -1,0 +1,89 @@
+﻿<html>
+<body>
+<button id="loginButton" onClick="logInWithFacebook()" type="button" style="display:none;">登入</button>
+<button id="logoutButton" onClick="logoutFacebook()" type="button" style="display:none;">登出</button>
+
+<div id="profile"></div>
+
+<script>
+
+  logoutFacebook = function(){
+      FB.logout(function(response) {
+          window.location.reload()
+      });
+  }
+
+
+
+  logInWithFacebook = function() {
+    FB.login(function(response) {
+      if (response.authResponse) {
+        //alert('Your user id is:'+ response.authResponse.userID);
+        document.getElementById("profile").innerHTML = JSON.stringify(response.authResponse);
+        document.getElementById("loginButton").style.display = "none";
+        document.getElementById("logoutButton").style.display = "block";
+        
+        // Now you can redirect the user or do an AJAX request to
+        // a PHP script that grabs the signed request from the cookie.
+      } else {
+        alert('User cancelled login or did not fully authorize.');
+      }
+    }, {scope: 'public_profile,email'});
+    return false;
+  };
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId: '401417810290014',
+      cookie: true, // This is important, it's not enabled by default
+      version: 'v2.10'
+    });
+    
+    FB.getLoginStatus(function(response) {
+
+      if (response.status === 'connected') {
+         var uid = response.authResponse.userID;
+         var accessToken = response.authResponse.accessToken;
+         document.getElementById("loginButton").style.display = "none";
+         document.getElementById("logoutButton").style.display = "block";
+         document.getElementById("profile").innerHTML = JSON.stringify(response.authResponse);
+       } else if (response.status === 'not_authorized') {
+         document.getElementById("loginButton").style.display = "block";
+         document.getElementById("logoutButton").style.display = "none";
+         // the user is logged in to Facebook, 
+         // but has not authenticated your app
+       } else {
+         document.getElementById("loginButton").style.display = "block";
+         document.getElementById("logoutButton").style.display = "none";
+         // the user isn't logged in to Facebook.
+       }
+    });
+    
+    //document.getElementById("myDIV").style.display = "none";
+
+  };
+
+  (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+
+
+</script>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.11&appId=401417810290014';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+</div>
+</body>
+</html>

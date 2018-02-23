@@ -1,0 +1,23 @@
+﻿<html>
+<head>
+    <title>打賞測試</title>
+</head>
+<body>
+<form method="POST" action="http://www.pkfun.xyz/api/contribute.php">
+    <!--<form method="GET" action="../api/GetAuthCode.php">-->
+    會員代號<input type="hidden" name="member_id"><br>
+    選擇主播<select id="anchor" name="anchor_id" class="form-control">
+        <option>請選擇</option>
+        <option value="1">多朵</option>
+        <option value="2">王美</option>
+        <option value="3">朱兒</option>
+        <option value="4">王小小</option>
+    </select><br>
+    打賞點數<input type="text" name="point"><br>
+    一句鼓勵的話<input type="text" name="content">
+    <input type="submit" value="送出">
+</form>
+
+
+</body>
+</html>
